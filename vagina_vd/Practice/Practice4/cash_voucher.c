@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define N 20 
 #define K 16
 
-int InputCode(int CODE[], int n) //ввод кода с проверкой на принадлежность базе данных кодов
+int InputCode(int CODE[], int n) //ГўГўГ®Г¤ ГЄГ®Г¤Г  Г± ГЇГ°Г®ГўГҐГ°ГЄГ®Г© Г­Г  ГЇГ°ГЁГ­Г Г¤Г«ГҐГ¦Г­Г®Г±ГІГј ГЎГ Г§ГҐ Г¤Г Г­Г­Г»Гµ ГЄГ®Г¤Г®Гў
 {
 	int i, f = 0, code;
 	printf("Enter code: \n");
@@ -16,8 +17,8 @@ int InputCode(int CODE[], int n) //ввод кода с проверкой на принадлежность базе 
 		}
 	}
 	if (f == 1)
-		return i; //если удачно, то номер в массиве 
-	else return -1; //если нет, то -1 - для вывода ошибки
+		return i; //ГҐГ±Г«ГЁ ГіГ¤Г Г·Г­Г®, ГІГ® Г­Г®Г¬ГҐГ° Гў Г¬Г Г±Г±ГЁГўГҐ 
+	else return -1; //ГҐГ±Г«ГЁ Г­ГҐГІ, ГІГ® -1 - Г¤Г«Гї ГўГ»ГўГ®Г¤Г  Г®ГёГЁГЎГЄГЁ
 }
 
 void Choose()
@@ -57,7 +58,7 @@ void OutputCheck(char product[][K], int price[], float discount[], int k[], floa
 	printf("    Name               Price      Discount      Cost \n");
 	for (i = 0; i < N; i++)
 	{
-		if (k[i] != 0) //проверка на скан хотя бы 1го продукта
+		if (k[i] != 0) //ГЇГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г±ГЄГ Г­ ГµГ®ГІГї ГЎГ» 1ГЈГ® ГЇГ°Г®Г¤ГіГЄГІГ 
 		{ 
 			for (j = 0; j < K; j++)
 				printf("%c", product[i][j]);
@@ -77,14 +78,14 @@ void main()
 		"Potatoes 1kg", "Cucumbers 1kg", "Tomatoes 1kg", "Sugar 1kg", "   Egg" };
 	int CODE[N] = { 1000, 1001, 1002, 1003, 1004, 1005,
 	1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
-	1014, 1015, 1016, 1017, 1018, 1019 }; //"1111" - для вывода чека
+	1014, 1015, 1016, 1017, 1018, 1019 }; //"1111" - Г¤Г«Гї ГўГ»ГўГ®Г¤Г  Г·ГҐГЄГ 
 	int PRICE[N] = { 28, 32, 25, 49, 30, 45, 120, 40, 60, 250, 60, 75,
-		80, 43, 65, 50, 150, 85, 55, 47 }; //цена каждого продукта
+		80, 43, 65, 50, 150, 85, 55, 47 }; //Г¶ГҐГ­Г  ГЄГ Г¦Г¤Г®ГЈГ® ГЇГ°Г®Г¤ГіГЄГІГ 
 	int pos_of_code, i, n, ch_action, fl = 0, f;
-	int arr_of_code[100] = { 0 }; //массив под сканированные коды
+	int arr_of_code[100] = { 0 }; //Г¬Г Г±Г±ГЁГў ГЇГ®Г¤ Г±ГЄГ Г­ГЁГ°Г®ГўГ Г­Г­Г»ГҐ ГЄГ®Г¤Г»
 	float DISCOUNT[N], fin_sum = 0, cost;
 	for (i = 0; i < N; i++)
-		DISCOUNT[i] = rand() % 50 + 1; //независимая генерация скидок на каждый товар
+		DISCOUNT[i] = rand() % 50 + 1; //Г­ГҐГ§Г ГўГЁГ±ГЁГ¬Г Гї ГЈГҐГ­ГҐГ°Г Г¶ГЁГї Г±ГЄГЁГ¤Г®ГЄ Г­Г  ГЄГ Г¦Г¤Г»Г© ГІГ®ГўГ Г°
 	printf("\n");
 	printf("           Welcome to our store 'Delicious'!\n");
 	printf("                  We glad to see you!\n");
@@ -118,7 +119,7 @@ void main()
 				printf("\n");
 				break;
 			}
-			arr_of_code[pos_of_code] ++; //счетчик сканированных кодов
+			arr_of_code[pos_of_code] ++; //Г±Г·ГҐГІГ·ГЁГЄ Г±ГЄГ Г­ГЁГ°Г®ГўГ Г­Г­Г»Гµ ГЄГ®Г¤Г®Гў
 			product(PRODUCTS, PRICE, DISCOUNT, pos_of_code);
 			cost = SUM(PRICE, DISCOUNT, pos_of_code);
 			fin_sum += cost;
