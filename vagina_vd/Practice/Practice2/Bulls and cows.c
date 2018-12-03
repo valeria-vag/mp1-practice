@@ -4,36 +4,51 @@
 #define N 10
 void main()
 {
-	int n, cows, bulls, i, f, j, m;
+	int n, cows = 0, bulls = 0, i, f, j, m = 0;
 	int  ch[N] = { 0 };
 	int ch_mb[N] = { 0 };
-	long long ch_predp, ch_nast, predp, a;
+	long long ch_predp, ch_nast = 0, predp, a;
 
 	do
 	{
 		printf("Vvedite kolichestvo tcifr v zagadannom chisle (do 10)\n"); //ввод кол-ва цифр числа и проверка 
 		scanf("%d", &n);
-	} while ((n <= 0) || (n > N));
+	} while (n <= 0 || n > N);
 
-	f = 0;
-	while (f == 0) // ввод массива с проверкой на повтор и 1-й "0"
-	{
-		for (i = 0; i < n; i++)
-			ch[i] = rand() % 10;
-		if (ch[0] == 0)
-			ch[0] = rand() % 10 + 1;
-		for (i = 0; i < n; i++)
-			for (j = i + 1; j < n - 1; j++)
-				if (ch[i] == ch[j])
+
+	srand((unsigned int)time(0));
+	f = 0; 
+	ch[0] = rand() % 9+1;
+	
+		for (i = 1; i < n; i++)
+		{
+			if (f == 1)
+			{
+				i--;
+				j--;
+			}
+			ch[i] = rand() % 9;
+			f = 0;
+			for (j = 1; j < n; j++)
+				if (ch[i - 1] == ch[j])
 					f = 1;
-	}
+		}
 
+
+
+	for (i = 0; i < n; i++)
+		printf("%d", ch[i]);
+	
+	i = 1;
+	ch_nast = ch[0];
 	while (i < n) // перевод числа, введенного комп., из массива в переменную 
 	{
-		ch_nast = ch[i] * 10 + ch[i + 1];
+		
+		ch_nast = ch_nast * 10 + ch[i];
 		i++;
 	}
-
+	printf("\n");
+	printf("%lld\n", ch_nast);
 	do
 	{
 		printf("Vvedite predpolagaemoe chislo (naturalnoe i pervaya tsifra ne 0)\n"); //ввод числа игроком и преобразование его в массив
@@ -41,15 +56,12 @@ void main()
 		do
 		{
 			scanf("%lld", &ch_predp);
-
-			ch_predp = a;
-			while (a != 0)                      // проверка на кол-во введенных цифр
+			a = ch_predp;
+			while (m != n)                      // проверка на кол-во введенных цифр
 			{
 				a = a % 10;
 				m++;
 			}
-
-
 			predp = ch_predp;
 			for (i = n - 1; i = 0; i--)
 			{
@@ -62,7 +74,7 @@ void main()
 				for (j = i + 1; j < n - 1; j++)
 					if (ch_mb[i] == ch_mb[j])
 						f = 1;
-		} while ((f == 0) || (ch_predp < 0) || (m > n));
+		} while (f == 0 || ch_predp < 0 || m > n);
 
 
 
