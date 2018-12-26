@@ -47,7 +47,6 @@ float SUM(int price[], float discount[], int  pos_of_code)
 	for (i = 0; i < N; i++)
 		sum = price[pos_of_code] * (1 - discount[pos_of_code] * 0.01);
 	return sum;
-
 }
 
 void OutputCheck(char product[][K], int price[], float discount[], int k[], float sum)
@@ -59,12 +58,11 @@ void OutputCheck(char product[][K], int price[], float discount[], int k[], floa
 	for (i = 0; i < N; i++)
 	{
 		if (k[i] != 0) //ïðîâåðêà íà ñêàí õîòÿ áû 1ãî ïðîäóêòà
-		{ 
+		{
 			for (j = 0; j < K; j++)
 				printf("%c", product[i][j]);
 			printf("*%d       %d rub.      %0.0f%%       %.2f rub. \n", k[i], price[i],  discount[i], price[i] * (1 - discount[i] * 0.01));
 		}
-			
 	}
 	printf("______________________________________________________\n");
 	printf("   TOTAL: %.2f \n", sum);
@@ -73,14 +71,14 @@ void OutputCheck(char product[][K], int price[], float discount[], int k[], floa
 void main()
 {
 	char PRODUCTS[N][K] = { "White bread", "Rye bread", "Baguette", "   Milk",
-		"  Yogurt", "Cottage cheese ", "Cheese", "Ice cream", "Cookie", "   Cake",
-		"Lemonade", "Candys 0.5kg", "Chocolate", "Potato chip", "Sausages",
-		"Potatoes 1kg", "Cucumbers 1kg", "Tomatoes 1kg", "Sugar 1kg", "   Egg" };
+			       "  Yogurt", "Cottage cheese ", "Cheese", "Ice cream", "Cookie", "   Cake",
+			       "Lemonade", "Candys 0.5kg", "Chocolate", "Potato chip", "Sausages",
+			       "Potatoes 1kg", "Cucumbers 1kg", "Tomatoes 1kg", "Sugar 1kg", "   Egg" };
 	int CODE[N] = { 1000, 1001, 1002, 1003, 1004, 1005,
-	1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
-	1014, 1015, 1016, 1017, 1018, 1019 }; //"1111" - äëÿ âûâîäà ÷åêà
+		       1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
+		       1014, 1015, 1016, 1017, 1018, 1019 }; //"1111" - äëÿ âûâîäà ÷åêà
 	int PRICE[N] = { 28, 32, 25, 49, 30, 45, 120, 40, 60, 250, 60, 75,
-		80, 43, 65, 50, 150, 85, 55, 47 }; //öåíà êàæäîãî ïðîäóêòà
+			80, 43, 65, 50, 150, 85, 55, 47 }; //öåíà êàæäîãî ïðîäóêòà
 	int pos_of_code, i, n, ch_action, fl = 0, f;
 	int arr_of_code[100] = { 0 }; //ìàññèâ ïîä ñêàíèðîâàííûå êîäû
 	float DISCOUNT[N], fin_sum = 0, cost;
@@ -104,38 +102,37 @@ void main()
 				printf("ERROR. SELECT THE ACTION (1 or 2)\n");
 				f = 1;
 			}
-				
 		} while (f == 1);
 		switch (ch_action)
 		{
-		case 1:
-		{
-			fl = 1;
-			pos_of_code = InputCode(CODE, N);
-			if (pos_of_code == -1)
-			{
-				printf("                             ERROR!\n");
-				printf("Check the code belonging to the interval from 1000 to 1019 inclusive\n");
-				printf("\n");
-				break;
-			}
-			arr_of_code[pos_of_code] ++; //ñ÷åò÷èê ñêàíèðîâàííûõ êîäîâ
-			product(PRODUCTS, PRICE, DISCOUNT, pos_of_code);
-			cost = SUM(PRICE, DISCOUNT, pos_of_code);
-			fin_sum += cost;
-			break;
-		case 2:
-			if (fl != 1)
-			{
-				printf("          ERROR! The check cannot be empty\n");
-				printf("         (Need to scan at least one product)\n");
-				break;
-			}
-			OutputCheck(PRODUCTS, PRICE, DISCOUNT, arr_of_code, fin_sum);
-			break;
-		}
+		case(1):
+				{
+					fl = 1;
+					pos_of_code = InputCode(CODE, N);
+					if (pos_of_code == -1)
+					{
+						printf("                             ERROR!\n");
+						printf("Check the code belonging to the interval from 1000 to 1019 inclusive\n");
+						printf("\n");
+						break;
+					}
+					arr_of_code[pos_of_code] ++; //ñ÷åò÷èê ñêàíèðîâàííûõ êîäîâ
+					product(PRODUCTS, PRICE, DISCOUNT, pos_of_code);
+					cost = SUM(PRICE, DISCOUNT, pos_of_code);
+					fin_sum += cost;
+					break;
+				}
+			case(2):
+				{
+					if (fl != 1)
+					{
+						printf("          ERROR! The check cannot be empty\n");
+						printf("         (Need to scan at least one product)\n");
+						break;
+					}
+					OutputCheck(PRODUCTS, PRICE, DISCOUNT, arr_of_code, fin_sum);
+					break;
+				}
 		}
 	} while (ch_action != 2 || fl != 1);
-	system("pause");
-	//return;
 }
