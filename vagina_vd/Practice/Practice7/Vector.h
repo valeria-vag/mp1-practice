@@ -14,13 +14,13 @@ public:
 	void Output();
 
 	const Vector& operator=(const Vector&);
-	Vector operator+(const Vector&); //сложение
+	Vector operator+(const Vector&); //Г±Г«Г®Г¦ГҐГ­ГЁГҐ
 	Vector operator+(double);
-	Vector operator-(const Vector&); //вычитание
+	Vector operator-(const Vector&); //ГўГ»Г·ГЁГІГ Г­ГЁГҐ
 	Vector operator-(double);
-	Vector operator*(const Vector&); //векторное произведение
-	Vector operator*(double); //умножение на число
-	Vector operator/(double); //деление на число
+	Vector operator*(const Vector&); //ГўГҐГЄГІГ®Г°Г­Г®ГҐ ГЇГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГҐ
+	Vector operator*(double); //ГіГ¬Г­Г®Г¦ГҐГ­ГЁГҐ Г­Г  Г·ГЁГ±Г«Г®
+	Vector operator/(double); //Г¤ГҐГ«ГҐГ­ГЁГҐ Г­Г  Г·ГЁГ±Г«Г®
 	
 	Vector& operator+=(double);
 	Vector operator+=(const Vector&);
