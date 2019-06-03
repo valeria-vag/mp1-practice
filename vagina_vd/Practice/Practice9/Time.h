@@ -1,4 +1,4 @@
-#ifndef _TIME_H_
+﻿#ifndef _TIME_H_
 #define _TIME_H_
 #include "iostream"
 using namespace std;
@@ -6,13 +6,13 @@ using namespace std;
 class Time
 {
 private:
-	int h = 0, m = 0;
+    int h = 0, m = 0;
 public:
-	Time();
-	Time(int, int);
-	~Time();
-	const Time& operator=(Time&);
+    Time();
+    Time(int, int);
+    ~Time();
+    const Time& operator=(Time&);
 
-	friend ostream& operator<<(ostream&, const Time&);
+    friend ostream& operator<<(ostream&, const Time&);
 };
 #endif
