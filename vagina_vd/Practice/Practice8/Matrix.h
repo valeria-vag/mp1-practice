@@ -1,4 +1,4 @@
-#ifndef _MATRIX_H_
+п»ї#ifndef _MATRIX_H_
 #define _MATRIX_H_
 #include <iostream>
 
@@ -7,51 +7,51 @@ using namespace std;
 class Matrix
 {
 private:
-	int rows, cols;
-	double *elements;
+    int rows, cols;
+    double *elements;
 public:
-	Matrix();
-	Matrix(int, int);
-	Matrix(const Matrix&);
-	Matrix(double*, int, int);
-	~Matrix();
+    Matrix();
+    Matrix(int, int);
+    Matrix(const Matrix&);
+    Matrix(double*, int, int);
+    ~Matrix();
 
-	void Output();
-	const Matrix& operator=(const Matrix&); //сравнение
-	Matrix operator+(const Matrix&); //сложение матриц
-	Matrix operator+(double); //добавление константы
-	Matrix operator-(const Matrix&);
-	Matrix operator-(double);
-	Matrix operator*(const Matrix&); //умножение на матрицу
-	Matrix operator*(double); //умножение на константу
-	double* operator[](int); //получение начала строки
+    void Output();
+    const Matrix& operator=(const Matrix&); //СЃСЂР°РІРЅРµРЅРёРµ
+    Matrix operator+(const Matrix&); //СЃР»РѕР¶РµРЅРёРµ РјР°С‚СЂРёС†
+    Matrix operator+(double); //РґРѕР±Р°РІР»РµРЅРёРµ РєРѕРЅСЃС‚Р°РЅС‚С‹
+    Matrix operator-(const Matrix&);
+    Matrix operator-(double);
+    Matrix operator*(const Matrix&); //СѓРјРЅРѕР¶РµРЅРёРµ РЅР° РјР°С‚СЂРёС†Сѓ
+    Matrix operator*(double); //СѓРјРЅРѕР¶РµРЅРёРµ РЅР° РєРѕРЅСЃС‚Р°РЅС‚Сѓ
+    double* operator[](int); //РїРѕР»СѓС‡РµРЅРёРµ РЅР°С‡Р°Р»Р° СЃС‚СЂРѕРєРё
 
-	friend istream& operator>>(istream&, Matrix&); //Ввод
-	friend ostream& operator<<(ostream &, const Matrix &); //Вывод
+    friend istream& operator>>(istream&, Matrix&); //Р’РІРѕРґ
+    friend ostream& operator<<(ostream &, const Matrix &); //Р’С‹РІРѕРґ
 };
 
 class ExceptionSize : exception
 {
 private:
-	const string msg;
+    const string msg;
 public:
-	ExceptionSize(string exc)
-		: msg(exc)
-	{
-	}
-	const char* what() const { return msg.c_str(); }
+    ExceptionSize(string exc)
+        : msg(exc)
+    {
+    }
+    const char* what() const { return msg.c_str(); }
 };
 
 class ExceptionIdx : exception
 {
 private:
-	const string msg;
+    const string msg;
 public:
-	ExceptionIdx(string exc)
-		: msg(exc)
-	{
-	}
-	const char* what() const { return msg.c_str(); }
+    ExceptionIdx(string exc)
+        : msg(exc)
+    {
+    }
+    const char* what() const { return msg.c_str(); }
 };
 
 #endif
