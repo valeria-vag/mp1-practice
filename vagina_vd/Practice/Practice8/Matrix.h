@@ -24,7 +24,7 @@ public:
     Matrix operator-(double);
     Matrix operator*(const Matrix&); //умножение на матрицу
     Matrix operator*(double); //умножение на константу
-    double* operator[](int); //получение начала строки
+    double*& operator[](int); //получение начала строки
 
     friend istream& operator>>(istream&, Matrix&); //Ввод
     friend ostream& operator<<(ostream &, const Matrix &); //Вывод

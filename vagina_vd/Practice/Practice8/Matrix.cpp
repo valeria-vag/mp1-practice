@@ -14,12 +14,11 @@ Matrix::Matrix()
 Matrix::Matrix(int _rows, int _cols)
 {
     if ((_rows <= 0) || (_cols <= 0))
-        throw Exception("Not correct size!");
+        throw ExceptionSize ("Not correct size!");
     rows = _rows;
     cols = _cols;
     elements = (double*)malloc(rows * cols * sizeof(double));
-    for (int i = 0; i < rows * cols; i++)
-        elements[i] = 0;
+	memset(elements, 0, sizeof(double) * rows * cols);
 } 
 
 Matrix::Matrix(const Matrix& A)
@@ -27,16 +26,14 @@ Matrix::Matrix(const Matrix& A)
     rows = A.rows;
     cols = A.cols;
     elements = (double*)malloc(rows * cols * sizeof(double));
-    for (int i = 0; i < rows * cols; i++)
-        elements[i] = A.elements[i];
+	memcpy(elements, A.elements, sizeof(double) * rows * cols);
 }
 
 Matrix::Matrix(double* _elements, int _rows, int _cols) {
     rows = _rows;
     cols = _cols;
     elements = (double*)malloc(rows * cols * sizeof(double));
-    for (int i = 0; i < rows * cols; i++)
-        elements[i] = _elements[i];
+	memcpy(elements, _elements, sizeof(double) * rows * cols);
 }
 
 Matrix::~Matrix()
@@ -52,8 +49,7 @@ const Matrix& Matrix::operator=(const Matrix& A)
         return *this;
     rows = A.rows;
     cols = A.cols;
-    for (int i = 0; i < rows * cols; i++)
-        elements[i] = A.elements[i];
+	memcpy(elements, A.elements, sizeof(double) * rows * cols);
     return *this;
 }
 
@@ -126,7 +122,7 @@ void Matrix::Output()
     cout << endl;
 }
 
-double* Matrix::operator[](int idx)
+double*& Matrix::operator[](int idx)
 {
     //исключения
     return(cols * idx + elements);
