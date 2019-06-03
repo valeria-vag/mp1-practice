@@ -1,127 +1,127 @@
-#include "Vector.h"
+ï»¿#include "Vector.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #define PI 3.14
 
 Vector MemAlloc(int size) {
-	Vector v;
-	v.size = size;
-	v.elements = (float*)malloc(sizeof(float) * v.size);
-	for (int i = 0; i < size; i++)
-		v.elements[i] = 0;
-	return v;
+    Vector v;
+    v.size = size;
+    v.elements = (float*)malloc(sizeof(float) * v.size);
+    for (int i = 0; i < size; i++)
+        v.elements[i] = 0;
+    return v;
 }
 
 Vector Create() {
-	Vector v;
-	int _size;
-	printf("Enter size of vector: ");
-	scanf_s("%d", &_size);
-	v.size = _size;
-	v.elements = (float*)malloc(sizeof(float)*v.size);
-	printf("Enter elements of vector: \n");
-	for (int i = 0; i < _size; i++)
-		scanf_s("%d", &(v.elements[i]));
-	return v;
+    Vector v;
+    int _size;
+    printf("Enter size of vector: ");
+    scanf_s("%d", &_size);
+    v.size = _size;
+    v.elements = (float*)malloc(sizeof(float)*v.size);
+    printf("Enter elements of vector: \n");
+    for (int i = 0; i < _size; i++)
+        scanf_s("%d", &(v.elements[i]));
+    return v;
 }
 
-//óäàëåíèå âåêòîðà
+//ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°
 void Delete(Vector v) {
-	v.size = 0;
+    v.size = 0;
 }
 
-//Ñëîæåíèå 
+//Ð¡Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ 
 Vector Plus(Vector v1, Vector v2) {
-	Vector v;
-	v = MemAlloc(v1.size);
-	if (v1.size != v2.size)
-	{
-		printf("Vectors have different sizes\n");
-		return v;
-	}
-	else
-		for (int i = 0; i < v1.size; i++)
-			v.elements[i] = v1.elements[i] + v2.elements[i];
-	return v;
+    Vector v;
+    v = MemAlloc(v1.size);
+    if (v1.size != v2.size)
+    {
+        printf("Vectors have different sizes\n");
+        return v;
+    }
+    else
+        for (int i = 0; i < v1.size; i++)
+            v.elements[i] = v1.elements[i] + v2.elements[i];
+    return v;
 }
 
-//Âû÷èòàíèå 
+//Ð’Ñ‹Ñ‡Ð¸Ñ‚Ð°Ð½Ð¸Ðµ 
 Vector Minus(Vector v1, Vector v2) {
-	Vector v;
-	v = MemAlloc(v1.size);
-	if (v1.size != v2.size)
-	{
-		printf("Vectors have different sizes\n");
-		return v;
-	}
-	else
-		for (int i = 0; i < v1.size; i++)
-			v.elements[i] = v1.elements[i] - v2.elements[i];
-	return v;
+    Vector v;
+    v = MemAlloc(v1.size);
+    if (v1.size != v2.size)
+    {
+        printf("Vectors have different sizes\n");
+        return v;
+    }
+    else
+        for (int i = 0; i < v1.size; i++)
+            v.elements[i] = v1.elements[i] - v2.elements[i];
+    return v;
 }
 
-//äëèíà âåêòîðà
+//Ð´Ð»Ð¸Ð½Ð° Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°
 float Length(Vector v)
 {
-	float length = 0;
-	for (int i = 0; i < v.size; i++)
-		length += (v.elements[i] * v.elements[i]);
-	length = sqrt(length);
-	return length;
+    float length = 0;
+    for (int i = 0; i < v.size; i++)
+        length += (v.elements[i] * v.elements[i]);
+    length = sqrt(length);
+    return length;
 }
 
-//óìíîæåíèå íà ÷èñëî
+//ÑƒÐ¼Ð½Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð½Ð° Ñ‡Ð¸ÑÐ»Ð¾
 Vector MultiplyNum(Vector v, float num) {
-	Vector V;
-	V = MemAlloc(v.size);
-	for (int i = 0; i < v.size; i++)
-		V.elements[i] = v.elements[i] * num;
-	return V;
+    Vector V;
+    V = MemAlloc(v.size);
+    for (int i = 0; i < v.size; i++)
+        V.elements[i] = v.elements[i] * num;
+    return V;
 }
 
-//ñêàëÿðíîå ïðîèçâåäåíèå âåêòîðîâ
+//ÑÐºÐ°Ð»ÑÑ€Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²
 Vector Multiply(Vector v1, Vector v2)
 {
-	Vector v;
+    Vector v;
 
-	v = MemAlloc(v1.size);
-	if (v1.size != v2.size)
-	{
-		printf("Vectors have different sizes\n");
-		return v;
-	}
-	for (int i = 0; i < v.size; i++)
-		v.elements[i] = v1.elements[i] * v2.elements[i];
-	return v;
+    v = MemAlloc(v1.size);
+    if (v1.size != v2.size)
+    {
+        printf("Vectors have different sizes\n");
+        return v;
+    }
+    for (int i = 0; i < v.size; i++)
+        v.elements[i] = v1.elements[i] * v2.elements[i];
+    return v;
 }
 
-//óãîë ìåæäó âåêòîðàìè
+//ÑƒÐ³Ð¾Ð» Ð¼ÐµÐ¶Ð´Ñƒ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°Ð¼Ð¸
 float Corner(Vector v1, Vector v2)
 {
-	float corner, tmp = 0;
-	if (v1.size != v2.size)
-	{
-		printf("Vectors have different sizes\n");
-		return 0;
-	}
-	for (int i = 0; i < v1.size; i++)
-		tmp += v1.elements[i] * v2.elements[i]; //ñêàëÿðíîå ïðîèçâåäåíèå
-	corner = tmp / (Length(v1) * Length(v2));
-	corner = acos(corner) * 180 / PI;
-	if (corner > 90) corner = 180 - corner;
-	return corner;
+    float corner, tmp = 0;
+    if (v1.size != v2.size)
+    {
+        printf("Vectors have different sizes\n");
+        return 0;
+    }
+    for (int i = 0; i < v1.size; i++)
+        tmp += v1.elements[i] * v2.elements[i]; //ÑÐºÐ°Ð»ÑÑ€Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ
+    corner = tmp / (Length(v1) * Length(v2));
+    corner = acos(corner) * 180 / PI;
+    if (corner > 90) corner = 180 - corner;
+    return corner;
 }
 
 void Output(Vector v)
 {
-	if (v.size == 0)
-		printf("Vector is empty\n");
-	else
-	{
-		printf("( ");
-		for (int i = 0; i < v.size; i++)
-			printf("%d ", v.elements[i]);
-		printf(")\n");
-	}
+    if (v.size == 0)
+        printf("Vector is empty\n");
+    else
+    {
+        printf("( ");
+        for (int i = 0; i < v.size; i++)
+            printf("%d ", v.elements[i]);
+        printf(")\n");
+    }
 };

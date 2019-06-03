@@ -1,9 +1,9 @@
-#ifndef __VECTOR_H_
+﻿#ifndef __VECTOR_H_
 #define __VECTOR_H_
 
 typedef struct {
-	float *elements;
-	int size;
+    float *elements;
+    int size;
 } Vector;
 
 Vector MemAlloc(int size);
