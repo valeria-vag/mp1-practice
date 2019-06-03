@@ -3,8 +3,11 @@
 #include <time.h>
 #include <windows.h>
 #include <locale.h>
+#include <math.h>
+
 #define size_of_str 1000
 #define el 2000
+
 void Input(wchar_t **arr_path)
 {
 	char *path;
@@ -113,7 +116,108 @@ void Input(wchar_t **arr_path)
 			}
 		}
 	}
+	
+	int CountingSort(ULONGLONG *size_of_file, int kolvo_f, int *idx)
+	{
+		int *count = (int*)malloc(el * sizeof(int));
+		int i, j, id = 0, idel = 0;
+		int del = 0, min, max, pos = 0;
 
+		min = size_of_file[0];
+		max = size_of_file[0];
+
+		for (i = 0; i < kolvo_f; i++)
+		{
+			if ((size_of_file[i]) < min)
+				min = size_of_file[i];
+			if ((size_of_file[i]) > max)
+				max = size_of_file[i];
+		}
+
+		del = max - min + 1;
+		idel = (int)del;
+
+		for (i = 0; i < kolvo_f; i++)
+			if (size_of_file[i] > el)
+				return -1;
+
+		for (i = 0; i < idel; i++)
+		{
+			if (count[i] > 0)
+			{
+				pos = 0;
+				for (j = 0; j < count[i]; j++)
+				{
+					while (size_of_file[pos] != i)
+						pos++;
+					idx[id] = pos;
+					pos++;
+					id++;
+				}
+			}
+		}
+
+		free(count);
+	}
+
+	void QuickSplit(int *arr_ind, ULONGLONG *size_of_file, int *i, int *j, ULONGLONG p)
+	{
+		int tmp;
+		do {
+			while (size_of_file[arr_ind[(*i)]] < p)
+				(*i)++;
+			while (size_of_file[arr_ind[(*j)]] > p)
+				(*j)--;
+			if ((*i) <= (*j))
+			{
+				tmp = arr_ind[(*i)];
+				ind[(*i)] = ind[(*j)];
+				ind[(*j)] = tmp;
+				(*i)++;
+				(*j)--;
+			}
+		} while ((*i) < (*j));
+	}
+
+	void QuickSort(ULONGLONG *size_of_file, int *arr_ind, int n1, int n2)
+	{
+		int mid = (n1 + n2) / 2;
+		int i = n1, j = n2;
+		quick_split(ind, size, &i, &j, size[ind[mid]]);
+		if (j > n1)
+			quick_sort(size, ind, n1, j);
+		if (i < n2)
+			quick_sort(size, ind, i, n2);
+	}
+
+	void Merge(ULONGLONG *size_of_file, int lb, int mid, int ub, int *arr_ind)
+	{
+		int i, j = mid + 1;
+		int pos, tmp;
+		for (i = lb; ((i < ub) && (j <= ub)); i++)
+		{
+			if (size_of_file[arr_ind[i]] > size_of_file[arr_ind[j]])
+			{
+				tmp = arr_ind[j];
+				for (pos = j; pos > i; pos--)
+					arr_ind[pos] = arr_ind[pos - 1];
+				arr_ind[i] = tmp;
+				j++;
+			}
+		}
+	}
+
+	void MergeSort(ULONGLONG *size_of_file, int lb, int ub, int *arr_ind)
+	{
+		int mid;
+		if (lb < ub)
+		{
+			mid = (lb + ub) / 2;
+			MergeSort(size_of_file, lb, mid, arr_ind);
+			MergeSort(size_of_file, mid + 1, ub, arr_ind);
+			Merge(size_of_file, lb, mid, ub, arr_ind);
+		}
+	}
 
 	void Output(ULONGLONG *size_of_file, int *arr_ind, int kolvo_f, wchar_t **name_of_file)
 	{
@@ -142,7 +246,7 @@ void Input(wchar_t **arr_path)
 			if (*sort > 1 || *sort < 6) k = 1;
 		} while (k != 1);
 	}
-	
+
 	void main()
 	{
 		int i, sort, ans = 0, k;
@@ -165,7 +269,7 @@ void Input(wchar_t **arr_path)
 				printf("Path not found");
 			arr_ind = (int*)malloc(kolvo_f * sizeof(int));
 			for (i = 0; i < kolvo_f; i++)
-				arr_ind [i] = i;
+				arr_ind[i] = i;
 			if (kolvo_f == 0)
 				printf("Files not found");
 			SelectSort(&sort);
@@ -176,10 +280,10 @@ void Input(wchar_t **arr_path)
 
 				getchar();
 				begin = clock();
-			ChooseSort(size_of_file, arr_ind, kolvo_f);
-			end = clock();
-			Output(size_of_file, arr_ind, kolvo_f, name_of_file);
-			break;
+				ChooseSort(size_of_file, arr_ind, kolvo_f);
+				end = clock();
+				Output(size_of_file, arr_ind, kolvo_f, name_of_file);
+				break;
 			}
 			case(2):
 			{
@@ -202,24 +306,48 @@ void Input(wchar_t **arr_path)
 				break;
 			}
 			case(4):
-			{
-				printf("Sorry. Sorting is temporarily unavailable.");
+			{    
+				getchar();
+				begin = clock();
+				ans = CountingSort(size_of_file, kolvo_f, arr_ind);
+				end = clock();
+				if (ans == -1)
+				{
+					printf("  File sizes are too large for this sort, please choose another sort\n");
+					break;
+				}
+				output(arr_ind, kolvo_f, name_of_file, size_of_file);
+				break;
+          
 			}
 			case(5):
 			{
-				printf("Sorry. Sorting is temporarily unavailable.");
+				getchar();
+				begin = clock();
+				quick_sort(size_of_file, arr_ind, 0, kolvo_f - 1);
+				end = clock();
+				output(arr_ind, kolvo_f, name_of_file, size_of_file);
+				break;
+			
 			}
 			case(6):
 			{
-				printf("Sorry. Sorting is temporarily unavailable.");
+				getchar();
+				begin = clock();
+				merge_sort(size_of_file, 0, kolvo_f - 1, arr_ind);
+				end = clock();
+				output(arr_ind, kolvo_f, name_of_file, size_of_file);
+				break;			
 			}
+			}
+
 			time = (float)(end - begin) / CLOCKS_PER_SEC;
 			printf("  Sorting time: %.3f cek\n", time);
 			for (i = 0; i < kolvo_f; i++)
-			free(name_of_file);
+				free(name_of_file);
 			free(size_of_file);
 			printf("If you want to do the sorting again, then enter 1");
 			printf("To exit, enter 0");
 			scanf("%d", &k);
-		} while (k != 0);
-}
+			} while (k != 0);
+	}
